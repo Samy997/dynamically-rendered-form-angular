@@ -2,8 +2,13 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: `
+    <app-layout>
+      <section body>
+        <app-dynamic-form></app-dynamic-form>
+      </section>
+    </app-layout>
+  `,
 })
 export class AppComponent {
   title = 'trufla-task';

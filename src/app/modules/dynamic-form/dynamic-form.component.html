@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <mat-form-field>
+        <mat-label>Form JSON</mat-label>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="10"
+          cdkAutosizeMaxRows="20"
+          [(ngModel)]="displayData"
+          (input)="dataChanged($event)"
+        ></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <hr style="width: 80%" />
+
+  <!-- ANCHOR Render Dynamic Form as HTML -->
+  <form [formGroup]="dynamicForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <ng-container
+        *ngFor="let input of dynamicFormData; let i = index"
+        formArrayName="dynamicFormList"
+      >
+        <!-- ANCHOR Textbox Input -->
+
+        <div *ngIf="input.type === 'Textbox'" class="col-md-4 col-sm-12">
+          <mat-form-field>
+            <mat-label *ngIf="input.label">{{ input.label }}</mat-label>
+            <input type="text" matInput [formControlName]="i" />
+          </mat-form-field>
+        </div>
+
+        <!-- ANCHOR DropDown Input -->
+
+        <div *ngIf="input.type === 'Dropdown'" class="col-md-4 col-sm-12">
+          <mat-form-field>
+            <mat-label *ngIf="input.label">{{ input.label }}</mat-label>
+            <input type="text" matInput [formControlName]="i" />
+          </mat-form-field>
+        </div>
+
+        <!-- ANCHOR Checkbox -->
+
+        <div *ngIf="input.type === 'Checkbox'" class="col-md-4 col-sm-12">
+          <mat-form-field>
+            <mat-label *ngIf="input.label">{{ input.label }}</mat-label>
+            <input type="text" matInput [formControlName]="i" />
+          </mat-form-field>
+        </div>
+
+        <!-- ANCHOR Radio Button -->
+
+        <div *ngIf="input.type === 'RadioButton'" class="col-md-4 col-sm-12">
+          <mat-form-field>
+            <mat-label *ngIf="input.label">{{ input.label }}</mat-label>
+            <input type="text" matInput [formControlName]="i" />
+          </mat-form-field>
+        </div>
+
+        <!-- ANCHOR Submit -->
+
+        <div *ngIf="input.type === 'Submit'" class="col-md-4 col-sm-12">
+          <button type="submit" mat-raised-button color="primary">
+            {{ input.label }}
+          </button>
+        </div>
+
+        <!-- ANCHOR Cancel Button -->
+
+        <div
+          *ngIf="input.type === 'Cancel Button'"
+          class="col-md-4 col-sm-12 text-center"
+        >
+          <button type="button" mat-button (click)="resetForm()">
+            {{ input.label }}
+          </button>
+        </div>
+      </ng-container>
+    </div>
+  </form>
+</div>
