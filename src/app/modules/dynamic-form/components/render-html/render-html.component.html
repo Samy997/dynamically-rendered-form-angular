@@ -1,0 +1,72 @@
+<form [formGroup]="dynamicForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <ng-container
+      *ngFor="let input of dynamicFormData; let i = index"
+      formArrayName="dynamicFormList"
+    >
+      <!-- ANCHOR Textbox Input -->
+
+      <div *ngIf="input.type === 'Textbox'" class="col-md-4 col-sm-12">
+        <mat-form-field>
+          <mat-label *ngIf="input.label">{{ input.label }}</mat-label>
+          <input type="text" matInput [formControlName]="i" />
+        </mat-form-field>
+      </div>
+
+      <!-- ANCHOR DropDown Input -->
+
+      <div *ngIf="input.type === 'Dropdown'" class="col-md-4 col-sm-12">
+        <mat-form-field>
+          <mat-label *ngIf="input.label">{{ input.label }}</mat-label>
+          <mat-select [formControlName]="i">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let item of items" [value]="item.value">
+              {{ item.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- ANCHOR Checkbox -->
+
+      <div *ngIf="input.type === 'Checkbox'" class="col-md-4 col-sm-12">
+        <mat-checkbox [formControlName]="i">{{ input.label }}</mat-checkbox>
+      </div>
+
+      <!-- ANCHOR Radio Button -->
+
+      <div
+        *ngIf="input.type === 'RadioButton'"
+        class="col-md-4 col-sm-12 align-self-center"
+      >
+        <mat-radio-group [formControlName]="i">
+          <mat-radio-button
+            class="mx-1"
+            *ngFor="let btn of input.values"
+            [value]="btn.value"
+            >{{ btn.label }}</mat-radio-button
+          >
+        </mat-radio-group>
+      </div>
+
+      <!-- ANCHOR Submit -->
+
+      <div *ngIf="input.type === 'Submit'" class="col-md-4 col-sm-12">
+        <button type="submit" mat-raised-button color="primary">
+          {{ input.label }}
+        </button>
+      </div>
+
+      <!-- ANCHOR Cancel Button -->
+
+      <div
+        *ngIf="input.type === 'Cancel Button'"
+        class="col-md-4 col-sm-12 text-center"
+      >
+        <button type="button" mat-button (click)="resetForm()">
+          {{ input.label }}
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</form>

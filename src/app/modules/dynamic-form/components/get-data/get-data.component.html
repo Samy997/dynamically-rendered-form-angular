@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-8 col-sm-12 text-center">
+    <mat-form-field>
+      <mat-label>Form JSON</mat-label>
+      <textarea
+        matInput
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="10"
+        cdkAutosizeMaxRows="20"
+        [(ngModel)]="displayData"
+        (input)="dataChanged($event)"
+      ></textarea>
+    </mat-form-field>
+  </div>
+  <div class="col-md-4">
+    <p class="p-2 bg-secondary text-light">
+      Types:
+      <br />
+      <span> 'Textbox', </span>
+      <br />
+      <span> 'Dropdown', </span>
+      <br />
+      <span> 'Checkbox', </span>
+      <br />
+      <span> 'RadioButton', </span>
+      <br />
+      <span> 'Submit', </span>
+      <br />
+      <span> 'Cancel Button' </span>
+    </p>
+  </div>
+</div>
